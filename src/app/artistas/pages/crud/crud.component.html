@@ -1,0 +1,140 @@
+<h1>artista</h1>
+<hr />
+<div class="card">
+<div class="row animated fadeIn faster">
+  <div class="col">
+
+    <form [formGroup]="artistForm" (ngSubmit)="saveInfo()">
+
+      <div class="form-group">
+        <label>Firebase ID</label>
+        <input type="text"
+               class="form-control"
+               placeholder="Firebase ID"
+               formControlName="id"
+               name="id">
+        <small class="form-text text-muted">Este campo es autogenerado</small>
+      </div>
+
+
+      <div class="form-group">
+          <label>Nombre del Artista</label>
+          <input type="text"
+                 class="form-control"
+                 placeholder="Nombre del Artista"
+                 formControlName="nombre"
+                 name="nombre">
+                 <span *ngIf="validfield('nombre')"class="text-danger">
+                  Debe contener al menos 3 caracteres
+                 </span>
+
+      </div>
+
+      <div class="form-group">
+          <label>Nacionalidad del Artista</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="nacionalidad"
+                 name="nacionalidad"
+                 placeholder="Nacionalidad del Artista">
+                 <span *ngIf="validfield('nacionalidad')"class="text-danger">
+                  Debe contener al menos 4 caracteres
+                 </span>
+      </div>
+
+        <div class="form-group">
+            <label>Foto del artista</label>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Agregue una foto"
+                   formControlName="foto"
+                   name="foto">
+                   <span *ngIf="validfield('foto')"class="text-danger">
+                    La url no es válida
+                   </span>
+
+        </div>
+
+        <div class="form-group">
+            <label>Nombre de Canción</label>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Nombre Canción"
+                   formControlName="cancion"
+                   name="cancion">
+                   <span *ngIf="validfield('cancion')"class="text-danger">
+                    Debe contener minimo 2 caracteres
+                   </span>
+
+        </div>
+
+        <div class="form-group">
+            <label>Puntuación de la canción</label>
+            <input type="number"
+                   class="form-control"
+                   placeholder="Puntuación de la canción"
+                   formControlName="puntuacion"
+                   name="puntuacion"
+                   required>
+                   <span *ngIf="validfield('puntuacion')" class="text-danger">
+                    El valor debe rondar entre 1 a 5
+                   </span>
+
+        </div>
+
+      <hr>
+      <div class="form-group text-center">
+        <button [disabled]="artistForm.status == 'INVALID'" class="btn btn-primary w-25">
+          <i class="fa fa-save"></i>
+          Agregar
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+</div>
+<hr>
+
+<table class="table table-dark table-striped">
+  <thead>
+      <tr>
+          <th> # </th>
+          <th> Artista </th>
+          <th> Nacionalidad </th>
+          <th> Foto </th>
+          <th> Editar </th>
+          <th> Borrar</th>
+      </tr>
+  </thead>
+   <tbody>
+      <tr *ngFor="let artista of artist; let i = index"> 
+          <td>{{ i + 1}}</td>
+          <td>{{ artista.nombre }}</td>
+          <td>{{ artista.Nacionalidad}}</td>
+          <td> <img [ngStyle]="{'max-width.px':50}" src="{{artista.Foto}}"></td>
+          <td>
+            <button class="btn btn-warning"
+            
+            (click)="uploadArtist(artista.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>
+
+            Editar
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger"
+                (click)="deleteArtist(artista, i)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                </svg>
+            Borrar
+            </button>
+          </td>
+      </tr>
+  </tbody>
+</table>

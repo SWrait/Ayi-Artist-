@@ -1,0 +1,26 @@
+
+<!-- <form  >
+    <input 
+        type="text"
+        name="termino"
+        class="form-control"
+        placeholder="Buscar cancion..."
+        (keyup.enter)="search()"
+        [(ngModel)]="resultado"
+        #txtsearch>
+    </form> -->
+
+
+
+
+
+    <form  autocomplete="on" (ngSubmit)="search()">
+        <input 
+            type="text"
+            name="termino"
+            class="form-control"
+            placeholder="Buscar pais..."
+            [(ngModel)]='termino'>
+            (input)="tecleo()"
+    </form>
+    

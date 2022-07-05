@@ -1,0 +1,18 @@
+<!-- <div>
+<h3>{{id?.nombre}}</h3>
+<img src="{{id.Foto}}" [ngStyle]="{'max-width.px':100}">
+<h5>{{id.Nacionalidad}}</h5>
+<h5>{{id.canciones[0].cancion}}</h5>
+<h5>{{id.canciones[0].puntuacion | number: '1.1-1'}}</h5>
+</div> -->
+
+<div class="card" style="width: 18rem;">
+    <img  [ngStyle]="{'max-width.px':300}" src="{{artist.Foto}}" class="card-img-top" alt="100px">
+    <div class="card-body">
+      <h2 class="card-title">{{artist.nombre}}</h2>
+      <p class="card-text">{{artist.Nacionalidad}}</p>
+      <p class="card-text">{{artist.canciones[0].cancion }}</p>
+      
+      <a [routerLink]="['/']" class="btn btn-primary">Volver</a>
+    </div>
+  </div>
