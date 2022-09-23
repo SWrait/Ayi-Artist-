@@ -31,9 +31,6 @@ export class InputComponent implements OnInit {
 
   constructor(private pageSvc:PageService){}
   
-  ngOnInit(): void {
-    
-  }
   // componente cambie una propiedad con ng model
   // output e input llegue a la comparacion 
   
@@ -83,14 +80,14 @@ export class InputComponent implements OnInit {
       console.log(this.termino)
     }
     
-    // ngOnInit(): void {
-    //   this.debouncer
-    //   .pipe(debounceTime(250))
-    //   .subscribe(valor => {
-    //     console.log(valor)
-    //     this.onDebounce.emit(valor)
-    //   })
-    //   }
+    ngOnInit(): void {
+      this.debouncer
+      .pipe(debounceTime(250))
+      .subscribe(valor => {
+        console.log(valor)
+        this.onDebounce.emit(valor)
+      })
+      }
       
     //   tecleo(){
     //     this.debouncer.next(this.termino)
